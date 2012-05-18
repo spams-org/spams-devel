@@ -295,8 +295,8 @@ void Trainer<T>::train(const Data<T>& X, const ParamDictLearn<T>& param) {
    T t0 = param.t0;
    int sparseD = param.modeD == L1L2 ? 2 : param.modeD == L1L2MU ? 7 : 6;
    int NUM_THREADS=init_omp(_NUM_THREADS);
-   fprintf(stderr,"num param iterD: %d\n",param.iter_updateD);
    if (param.verbose) {
+      fprintf(stderr,"num param iterD: %d\n",param.iter_updateD);
       if (param.batch) {
          cout << "Batch Mode" << endl;
       } else if (param.stochastic) {
