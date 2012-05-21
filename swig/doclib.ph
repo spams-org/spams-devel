@@ -226,7 +226,9 @@ sub get_doc {
 		    push(@$tmp,"$p1:");
 		    s/^param\.[\w]+\s*,\s*param\.[\w]+\s*/$p2: /;
 		} else {
-		    s/^param\.([^\s]+)\s/$1: /;
+		    if (! /^param\.([^\s]+)\s*=/) {
+			s/^param\.([^\s]+)\s/$1: /;
+		    }
 		}
 	    }
 	    s/param\.//g;
@@ -374,6 +376,9 @@ sub get_modifs {
 			$d = 0;
 		    }
 		    $prev_indent = $n;
+		    if($key eq "Param" && ($_ =~ /:\s*$/)) {
+			s/$/    undocumented; modify at your own risks!/;
+		    }
 		}
 		push(@$tmp,$_);
 		push(@$deltas,$d);

@@ -249,7 +249,7 @@ spams.fistaFlat <- function(Y,X,W0,return_optim_info = FALSE,numThreads =-1,max_
               compute_gram=FALSE,lin_admm=FALSE,admm=FALSE,intercept=FALSE,
               resetflow=FALSE,regul="",loss="",verbose=FALSE,pos=FALSE,clever=FALSE,
               log=FALSE,ista=FALSE,subgrad=FALSE,logName="",is_inner_weights=FALSE,
-              inner_weights=c(0.),eval=FALSE,size_group=1,sqrt_step=TRUE,transpose=FALSE) {
+              inner_weights=c(0.),size_group=1,sqrt_step=TRUE,transpose=FALSE) {
 
   m = nrow(W0)
   n = ncol(W0)
@@ -257,7 +257,7 @@ spams.fistaFlat <- function(Y,X,W0,return_optim_info = FALSE,numThreads =-1,max_
   W = matrix(c(0),nrow = m,ncol = n)
 #  optim_info = do.call(solver,c(list(Y,X,W0,W),params))
 ##  optim_info = .mycall('fistaFlat',c('Y','X','W0','W',params))
-  optim_info = fistaFlat(Y,X,W0,W,numThreads ,max_it ,L0,fixed_step,gamma,lambda1,delta,lambda2,lambda3,a,b,c,tol,it0,max_iter_backtracking,compute_gram,lin_admm,admm,intercept,resetflow,regul,loss,verbose,pos,clever,log,ista,subgrad,logName,is_inner_weights,inner_weights,eval,size_group,sqrt_step,transpose)
+  optim_info = fistaFlat(Y,X,W0,W,numThreads ,max_it ,L0,fixed_step,gamma,lambda1,delta,lambda2,lambda3,a,b,c,tol,it0,max_iter_backtracking,compute_gram,lin_admm,admm,intercept,resetflow,regul,loss,verbose,pos,clever,log,ista,subgrad,logName,is_inner_weights,inner_weights,size_group,sqrt_step,transpose)
   if(return_optim_info == TRUE)
     return(list(W,optim_info))
   else
@@ -270,7 +270,7 @@ spams.fistaTree <- function(Y,X,W0,tree,return_optim_info = FALSE,numThreads =-1
               compute_gram=FALSE,lin_admm=FALSE,admm=FALSE,intercept=FALSE,
               resetflow=FALSE,regul="",loss="",verbose=FALSE,pos=FALSE,clever=FALSE,
               log=FALSE,ista=FALSE,subgrad=FALSE,logName="",is_inner_weights=FALSE,
-              inner_weights=c(0.),eval=FALSE,size_group=1,sqrt_step=TRUE,transpose=FALSE) {
+              inner_weights=c(0.),size_group=1,sqrt_step=TRUE,transpose=FALSE) {
   if (length(tree) != 4) {
     stop("fistaTree : tree should be a list of 4 elements")
   }
@@ -282,7 +282,7 @@ spams.fistaTree <- function(Y,X,W0,tree,return_optim_info = FALSE,numThreads =-1
   n = ncol(W0)
 #  W = matrix(rep(0,m * n),nrow = m,ncol = n)
   W = matrix(c(0),nrow = m,ncol = n)
-  optim_info = fistaTree(Y,X,W0,W,eta_g,groups,own_variables,N_own_variables,numThreads ,max_it ,L0,fixed_step,gamma,lambda1,delta,lambda2,lambda3,a,b,c,tol,it0,max_iter_backtracking,compute_gram,lin_admm,admm,intercept,resetflow,regul,loss,verbose,pos,clever,log,ista,subgrad,logName,is_inner_weights,inner_weights,eval,size_group,sqrt_step,transpose)
+  optim_info = fistaTree(Y,X,W0,W,eta_g,groups,own_variables,N_own_variables,numThreads ,max_it ,L0,fixed_step,gamma,lambda1,delta,lambda2,lambda3,a,b,c,tol,it0,max_iter_backtracking,compute_gram,lin_admm,admm,intercept,resetflow,regul,loss,verbose,pos,clever,log,ista,subgrad,logName,is_inner_weights,inner_weights,size_group,sqrt_step,transpose)
   if(return_optim_info == TRUE)
     return(list(W,optim_info))
   else
@@ -387,9 +387,11 @@ spams.trainDL <- function(X,return_model= FALSE,model= NULL,D = matrix(c(0.),nro
 }
 
 spams.trainDL_Memory <- function(X,D = matrix(c(0.),nrow = 0,ncol=0),numThreads = -1,batchsize = -1,
-            K= -1,lambda1= NULL,lambda2= 10e-10,iter=-1,t0=1e-5,mode='PENALTY',
-                 posAlpha=FALSE,posD=FALSE,expand=FALSE,modeD='L2',whiten=FALSE,clean=TRUE,verbose=TRUE,gamma1=0.,gamma2=0.,rho=1.0,iter_updateD=1.,stochastic_deprecated=FALSE,modeParam=0,batch=FALSE,log_deprecated=FALSE,logName='') {
-  
+            K= -1,lambda1= NULL,iter=-1,t0=1e-5,mode='PENALTY',
+                 posD=FALSE,expand=FALSE,modeD='L2',whiten=FALSE,clean=TRUE,gamma1=0.,gamma2=0.,rho=1.0,iter_updateD=1.,stochastic_deprecated=FALSE,modeParam=0,batch=FALSE,log_deprecated=FALSE,logName='') {
+  lambda2 = 10e-10
+  verbose = FALSE
+  posAlpha = FALSE
   return (.TrainDL(X,FALSE,NULL,TRUE,D,numThreads,batchsize,K,lambda1,lambda2,iter,t0,mode,posAlpha,posD,expand,modeD,whiten,clean,verbose,gamma1,gamma2,rho,iter_updateD,stochastic_deprecated,modeParam,batch,log_deprecated,logName))
 }
 

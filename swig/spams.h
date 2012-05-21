@@ -341,7 +341,6 @@ Matrix<T> *_fistaFlat(Matrix<T> *X,AbstractMatrixB<T> *D,Matrix<T> *alpha0,
 	     char* logName,
 	     bool is_inner_weights,
 	     Vector<T> *inner_weights,
-	     bool eval,
 	     int size_group,
 	     bool sqrt_step,
 	     bool transpose
@@ -406,7 +405,7 @@ using namespace FISTA;
     param.inner_weights = inner_weights->rawX();
   }
 
-  param.eval = eval;
+  param.eval = false;
   param.size_group = size_group;
   param.sqrt_step = sqrt_step;
   param.transpose = transpose;
@@ -484,7 +483,6 @@ Matrix<T> *_fistaTree(
 	     char* logName,
 	     bool is_inner_weights,
 	     Vector<T> *inner_weights,
-	     bool eval,
 	     int size_group,
 	     bool sqrt_step,
 	     bool transpose
@@ -549,7 +547,7 @@ using namespace FISTA;
     param.inner_weights = inner_weights->rawX();
   }
 
-  param.eval = eval;
+  param.eval = false;
   param.size_group = size_group;
   param.sqrt_step = sqrt_step;
   param.transpose = transpose;
