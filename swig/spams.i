@@ -35,6 +35,13 @@ il faut mettre -lstdc++ en t^ete des libs au link ou faire LD_PRELOAD=libstdc++.
 %enddef
 
 // list of arguments of type INPLACE_MATRIX
+%define inplace_bool_matrices
+	Matrix<bool> *B
+%enddef
+%define inplace_bool_spmatrices
+    SpMatrix<bool> *groups
+%enddef
+
 %define inplace_matrices(ctype)
      Matrix<ctype> *A,
      Matrix<ctype> *B,
