@@ -215,25 +215,28 @@ the function mexTrainDL_Memory can be faster but uses more memory.</B>
 %              p is the number of elements in the dictionary
 %              When D is not provided, the dictionary is initialized 
 %              with random elements from the training set.
+%           param.K (size of the dictionary, optional is param.D is provided)
 %           param.lambda  (parameter)
 %           param.lambda2  (optional, by default 0)
 %           param.iter (number of iterations).  If a negative number is 
 %              provided it will perform the computation during the
 %              corresponding number of seconds. For instance param.iter=-5
 %              learns the dictionary during 5 seconds.
-%            param.mode (optional, see above, by default 2) 
-%            param.posAlpha (optional, adds positivity constraints on the
-%              coefficients, false by default, not compatible with 
-%              param.mode =3,4)
-%            param.modeD (optional, see above, by default 0)
-%            param.posD (optional, adds positivity constraints on the 
-%              dictionary, false by default, not compatible with 
-%              param.modeD=2)
-%            param.gamma1 (optional parameter for param.modeD &gt;= 1)
-%            param.gamma2 (optional parameter for param.modeD = 2)
-%            param.batchsize (optional, size of the minibatch, by default 
+%           param.mode (optional, see above, by default 2) 
+%           param.posAlpha (optional, adds positivity constraints on the
+%             coefficients, false by default, not compatible with 
+%             param.mode =3,4)
+%           param.modeD (optional, see above, by default 0)
+%           param.posD (optional, adds positivity constraints on the 
+%             dictionary, false by default, not compatible with 
+%             param.modeD=2)
+%           param.gamma1 (optional parameter for param.modeD &gt;= 1)
+%           param.gamma2 (optional parameter for param.modeD = 2)
+%           param.batchsize (optional, size of the minibatch, by default 
 %              512)
-%            param.modeParam (optimization mode).
+%           param.iter_updateD (optional, number of BCD iterations for the dictionary
+%              update step, by default 1)
+%           param.modeParam (optimization mode).
 %              1) if param.modeParam=0, the optimization uses the 
 %                 parameter free strategy of the ICML paper
 %              2) if param.modeParam=1, the optimization uses the 
@@ -241,10 +244,12 @@ the function mexTrainDL_Memory can be faster but uses more memory.</B>
 %              3) if param.modeParam=2, the optimization uses exponential 
 %                 decay weights with updates of the form 
 %                 A_{t} &lt;- rho A_{t-1} + alpha_t alpha_t^T
-%            param.rho (optional) tuning parameter (see paper arXiv:0908.0050)
-%            param.clean (optional, true by default. prunes 
+%           param.rho (optional) tuning parameter (see paper arXiv:0908.0050)
+%           param.t0 (optional) tuning parameter (see paper arXiv:0908.0050)
+%           param.clean (optional, true by default. prunes 
 %              automatically the dictionary from unused elements).
-%            param.numThreads (optional, number of threads for exploiting
+%           param.verbose (optional, true by default, increase verbosity)
+%           param.numThreads (optional, number of threads for exploiting
 %              multi-core / multi-cpus. By default, it takes the value -1,
 %              which automatically selects all the available CPUs/cores).
 %
@@ -315,6 +320,7 @@ Note that unlike mexTrainDL this function does not allow warm-restart.
 %              p is the number of elements in the dictionary
 %              When D is not provided, the dictionary is initialized 
 %              with random elements from the training set.
+%           param.K (size of the dictionary, optional is param.D is provided)
 %           param.lambda  (parameter)
 %           param.iter (number of iterations).  If a negative number is 
 %              provided it will perform the computation during the
@@ -329,6 +335,8 @@ Note that unlike mexTrainDL this function does not allow warm-restart.
 %            param.gamma2 (optional parameter for param.modeD = 2)
 %            param.batchsize (optional, size of the minibatch, by default 
 %              512)
+%            param.iter_updateD (optional, number of BCD iterations for the dictionary 
+%                update step, by default 1)
 %            param.modeParam (optimization mode).
 %              1) if param.modeParam=0, the optimization uses the 
 %                 parameter free strategy of the ICML paper
@@ -338,6 +346,7 @@ Note that unlike mexTrainDL this function does not allow warm-restart.
 %                 decay weights with updates of the form 
 %                 A_{t} &lt;- rho A_{t-1} + alpha_t alpha_t^T
 %            param.rho (optional) tuning parameter (see paper arXiv:0908.0050)
+%            param.t0 (optional) tuning parameter (see paper arXiv:0908.0050)
 %            param.clean (optional, true by default. prunes 
 %              automatically the dictionary from unused elements).
 %            param.numThreads (optional, number of threads for exploiting
@@ -748,7 +757,7 @@ as an argument, see below:</P><PRE CLASS="verbatim"><FONT SIZE=2>%
 %                 implementation or one based on the matrix inversion Lemma
 %               param.ols (optional, default false), perform an orthogonal projection
 %                 before returning the solution.
-%               param.max_length_path (optional) maximum length of the path.
+%               param.max_length_path (optional) maximum length of the path, by default 4*p
 %
 % Output: A: double sparse p x n matrix (output coefficients)
 %         path: optional,  returns the regularisation path for the first signal
@@ -901,7 +910,8 @@ or
 %                                                              &lt;= lambda*||beta||_0/m
 %       3) when param.mode=2
 %         min_{alpha} 0.5||diag(beta)(x-Dalpha)||_2^2 +
-%                                                 lambda*(||beta||_0/m)*||alpha||_1 
+%                                                 lambda*(||beta||_0/m)*||alpha||_1 +
+%                                                 (lambda2/2)||alpha||_2^2
 %     Possibly, when param.pos=true, it solves the previous problems
 %     with positivity constraints on the vectors alpha
 %
@@ -919,6 +929,8 @@ or
 %               param.pos (optional, adds positivity constraints on the
 %                 coefficients, false by default)
 %               param.mode (see above, by default: 2)
+%               param.lambda2  (optional parameter for solving the Elastic-Net)
+%                              for mode=0 and mode=1, it adds a ridge on the Gram Matrix
 %               param.numThreads (optional, number of threads for exploiting
 %                 multi-core / multi-cpus. By default, it takes the value -1,
 %                 which automatically selects all the available CPUs/cores).
@@ -1354,7 +1366,10 @@ or
 </TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
 <TR><TD CLASS="hbar"></TD></TR>
 <TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||<I><B>u</B></I>−<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP> + λ ||<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>,
+</TABLE></TD><TD CLASS="dcell">||<I><B>u</B></I>−<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP> + </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">λ</TD></TR>
+<TR><TD CLASS="hbar"></TD></TR>
+<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
+</TABLE></TD><TD CLASS="dcell"> ||<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>,
     (26)</TD></TR>
 </TABLE><P>
 or
@@ -1542,7 +1557,7 @@ where <I><B>V</B><SUP>j</SUP></I> is the <I>j</I>-th column of <I><B>V</B></I>.<
 %         if param.regul='l1'
 %             argmin 0.5||u-v||_2^2 + lambda||v||_1
 %         if param.regul='l2'
-%             argmin 0.5||u-v||_2^2 + lambda||v||_2^2
+%             argmin 0.5||u-v||_2^2 + 0.5lambda||v||_2^2
 %         if param.regul='elastic-net'
 %             argmin 0.5||u-v||_2^2 + lambda||v||_1 + lambda_2||v||_2^2
 %         if param.regul='fused-lasso'
@@ -1554,17 +1569,17 @@ where <I><B>V</B><SUP>j</SUP></I> is the <I>j</I>-th column of <I><B>V</B></I>.<
 %             argmin 0.5||u-v||_2^2 + lambda||v||_2
 %         if param.regul='group-lasso-l2'  
 %             argmin 0.5||u-v||_2^2 + lambda sum_g ||v_g||_2 
-%             where the groups are consecutive entries of v of size param.group_size 
+%             where the groups are consecutive entries of v of size param.size_group 
 %         if param.regul='group-lasso-linf'
 %             argmin 0.5||u-v||_2^2 + lambda sum_g ||v_g||_inf
 %         if param.regul='sparse-group-lasso-l2'  
 %             argmin 0.5||u-v||_2^2 + lambda sum_g ||v_g||_2 + lambda_2 ||v||_1
-%             where the groups are consecutive entries of v of size param.group_size 
+%             where the groups are consecutive entries of v of size param.size_group 
 %         if param.regul='sparse-group-lasso-linf'
 %             argmin 0.5||u-v||_2^2 + lambda sum_g ||v_g||_inf + lambda_2 ||v||_1
 %         if param.regul='trace-norm-vec' 
 %             argmin 0.5||u-v||_2^2 + lambda ||mat(v)||_* 
-%            where mat(v) has param.group_size rows
+%            where mat(v) has param.size_group rows
 %
 %         if one chooses a regularization function on matrices
 %         if param.regul='l1l2',  V= 
@@ -1598,8 +1613,8 @@ where <I><B>V</B><SUP>j</SUP></I> is the <I>j</I>-th column of <I><B>V</B></I>.<
 %               param.verbose (optional, verbosity level, false by default)
 %               param.intercept (optional, last row of U is not regularized,
 %                 false by default)
-%               param.transpose (optional, transpose the matrix in the regularizaiton function)
-%               param.group_size (optional, for regularization functions assuming a group
+%               param.transpose (optional, transpose the matrix in the regularization function)
+%               param.size_group (optional, for regularization functions assuming a group
 %                 structure)
 %               param.pos (optional, adds positivity constraints on the
 %                 coefficients, false by default)
@@ -1772,6 +1787,9 @@ which is a formulation presented in [<A HREF="#mairal10">20</A>].</P><P>This fun
 %                 false by default)
 %               param.pos (optional, adds positivity constraints on the
 %                 coefficients, false by default)
+%               param.transpose (optional, transpose the matrix in the regularization function)
+%               param.size_group (optional, for regularization functions assuming a group
+%                 structure)
 %               param.numThreads (optional, number of threads for exploiting
 %                 multi-core / multi-cpus. By default, it takes the value -1,
 %                 which automatically selects all the available CPUs/cores).
@@ -2125,10 +2143,14 @@ see usage details below:</P><PRE CLASS="verbatim"><FONT SIZE=2>%
 %                false by default)
 %            param.pos (optional, adds positivity constraints on the
 %                coefficients, false by default)
+%            param.transpose (optional, transpose the matrix in the regularization function)
+%            param.size_group (optional, for regularization functions assuming a group
+%                 structure)
 %            param.numThreads (optional, number of threads for exploiting
 %                multi-core / multi-cpus. By default, it takes the value -1,
 %                which automatically selects all the available CPUs/cores).
 %            param.max_it (optional, maximum number of iterations, 100 by default)
+%            param.it0 (optional, frequency for computing duality gap, every 10 iterations by default)
 %            param.tol (optional, tolerance for stopping criteration, which is a relative duality gap
 %                if it is available, or a relative change of parameters).
 %            param.gamma (optional, multiplier for increasing the parameter L in fista, 1.5 by default)
@@ -2183,14 +2205,16 @@ see usage details below:</P><PRE CLASS="verbatim"><FONT SIZE=2>%
 %            param.lambda2 (optional, regularization parameter, 0 by default)
 %            param.lambda3 (optional, regularization parameter, 0 by default)
 %            param.verbose (optional, verbosity level, false by default)
-%            param.intercept (optional, last row of U is not regularized,
-%                false by default)
 %            param.pos (optional, adds positivity constraints on the
 %                coefficients, false by default)
+%            param.transpose (optional, transpose the matrix in the regularization function)
+%            param.size_group (optional, for regularization functions assuming a group
+%                 structure)
 %            param.numThreads (optional, number of threads for exploiting
 %                multi-core / multi-cpus. By default, it takes the value -1,
 %                which automatically selects all the available CPUs/cores).
 %            param.max_it (optional, maximum number of iterations, 100 by default)
+%            param.it0 (optional, frequency for computing duality gap, every 10 iterations by default)
 %            param.tol (optional, tolerance for stopping criteration, which is a relative duality gap
 %                if it is available, or a relative change of parameters).
 %            param.gamma (optional, multiplier for increasing the parameter L in fista, 1.5 by default)
@@ -2247,14 +2271,13 @@ see usage details below:</P><PRE CLASS="verbatim"><FONT SIZE=2>%
 %            param.lambda2 (optional, regularization parameter, 0 by default)
 %            param.lambda3 (optional, regularization parameter, 0 by default)
 %            param.verbose (optional, verbosity level, false by default)
-%            param.intercept (optional, last row of U is not regularized,
-%                false by default)
 %            param.pos (optional, adds positivity constraints on the
 %                coefficients, false by default)
 %            param.numThreads (optional, number of threads for exploiting
 %                multi-core / multi-cpus. By default, it takes the value -1,
 %                which automatically selects all the available CPUs/cores).
 %            param.max_it (optional, maximum number of iterations, 100 by default)
+%            param.it0 (optional, frequency for computing duality gap, every 10 iterations by default)
 %            param.tol (optional, tolerance for stopping criteration, which is a relative duality gap
 %                if it is available, or a relative change of parameters).
 %            param.gamma (optional, multiplier for increasing the parameter L in fista, 1.5 by default)
@@ -2304,6 +2327,8 @@ function <CODE>pcg</CODE>, especially when the library uses the Intel Math Kerne
 <H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc35">6.2</A>  Function mexBayer</H3><!--SEC END --><P>Apply a Bayer pattern to an input image
 </P><PRE CLASS="verbatim"><FONT SIZE=2>% 
 % Usage:   Y =mexBayer(X,offset);
+%
+% Name: mexBayer
 %
 % Description: mexBayer applies a Bayer pattern to an image X.
 %       There are four possible offsets.
