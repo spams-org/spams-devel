@@ -1,56 +1,56 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-            "http://www.w3.org/TR/REC-html40/loose.dtd">
-<HTML>
-<HEAD>
-
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META name="GENERATOR" content="hevea 1.10">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.06">
 
 <META name="Author" content="Julien Mairal">
-<link rel="stylesheet" href="doc_spams.css">
-<LINK rel="stylesheet" type="text/css" href="doc_spams.css">
-<TITLE>Sparse Decomposition Toolbox</TITLE>
-</HEAD>
-<BODY >
-<A HREF="doc_spams003.html"><IMG SRC="previous_motif.gif" ALT="Previous"></A>
-<A HREF="index.html"><IMG SRC="contents_motif.gif" ALT="Up"></A>
-<A HREF="doc_spams005.html"><IMG SRC="next_motif.gif" ALT="Next"></A>
-<HR>
-<H2 CLASS="section"><A NAME="htoc8">4</A>  Sparse Decomposition Toolbox</H2><UL>
-<LI><A HREF="doc_spams004.html#toc5">Function mexOMP</A>
-</LI><LI><A HREF="doc_spams004.html#toc6">Function mexOMPMask</A>
-</LI><LI><A HREF="doc_spams004.html#toc7">Function mexLasso</A>
-</LI><LI><A HREF="doc_spams004.html#toc8">Function mexLassoWeighted</A>
-</LI><LI><A HREF="doc_spams004.html#toc9">Function mexLassoMask</A>
-</LI><LI><A HREF="doc_spams004.html#toc10">Function mexCD</A>
-</LI><LI><A HREF="doc_spams004.html#toc11">Function mexSOMP</A>
-</LI><LI><A HREF="doc_spams004.html#toc12">Function mexL1L2BCD</A>
-</LI><LI><A HREF="doc_spams004.html#toc13">Function mexSparseProject</A>
-</LI></UL>
-<P>
+<link rel="stylesheet" href="doc_spams.css"><link rel="stylesheet" type="text/css" href="doc_spams.css">
+<title>Sparse Decomposition Toolbox</title>
+</head>
+<body>
+<a href="doc_spams003.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="doc_spams005.html"><img src="next_motif.gif" alt="Next"></a>
+<hr>
+<h2 class="section" id="sec8">4  Sparse Decomposition Toolbox</h2>
+<ul>
+<li><a href="doc_spams004.html#sec9">Function mexOMP</a>
+</li><li><a href="doc_spams004.html#sec10">Function mexOMPMask</a>
+</li><li><a href="doc_spams004.html#sec11">Function mexLasso</a>
+</li><li><a href="doc_spams004.html#sec12">Function mexLassoWeighted</a>
+</li><li><a href="doc_spams004.html#sec13">Function mexLassoMask</a>
+</li><li><a href="doc_spams004.html#sec14">Function mexCD</a>
+</li><li><a href="doc_spams004.html#sec15">Function mexSOMP</a>
+</li><li><a href="doc_spams004.html#sec16">Function mexL1L2BCD</a>
+</li><li><a href="doc_spams004.html#sec17">Function mexSparseProject</a>
+</li></ul>
+<p>
 This toolbox implements several algorithms for solving signal reconstruction problems. It is mostly adapted for solving a large number of small/medium scale problems, but can be also efficient sometimes with large scale ones.
-</P><H3 CLASS="subsection"><A NAME="toc5"></A><A NAME="htoc9">4.1</A>  Function mexOMP</H3><P>
-This is a fast implementation of the Orthogonal Matching Pursuit algorithm (or forward selection) [<A HREF="doc_spams008.html#mallat4">21</A>, <A HREF="doc_spams008.html#weisberg">28</A>]. Given a matrix of signals <I><B>X</B></I>=[<I><B>x</B></I><SUP>1</SUP>,…,<I><B>x</B><SUP>n</SUP></I>] in ℝ<SUP><I>m</I> × <I>n</I></SUP> and a dictionary <I><B>D</B></I>=[<I><B>d</B></I><SUP>1</SUP>,…,<I><B>d</B><SUP>p</SUP></I>] in ℝ<SUP><I>m</I> × <I>p</I></SUP>, the algorithm computes a matrix <I><B>A</B></I>=[α<SUP>1</SUP>,…,α<I><SUP>n</SUP></I>] in ℝ<SUP><I>p</I> × <I>n</I></SUP>,
-where for each column <I><B>x</B></I> of <I><B>X</B></I>, it returns a coefficient vector α which is an approximate solution of the following NP-hard problem
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP>   s.t.   ||α||<SUB>0</SUB> ≤ <I>L</I>.
-    (2)</TD></TR>
-</TABLE><P>
+</p>
+<h3 class="subsection" id="sec9">4.1  Function mexOMP</h3>
+<p>
+This is a fast implementation of the Orthogonal Matching Pursuit algorithm (or forward selection) [<a href="doc_spams008.html#mallat4">21</a>, <a href="doc_spams008.html#weisberg">28</a>]. Given a matrix of signals <span class="c006">X</span>=[<span class="c006">x</span><sup>1</sup>,…,<span class="c006">x</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span></sup> and a dictionary <span class="c006">D</span>=[<span class="c006">d</span><sup>1</sup>,…,<span class="c006">d</span><sup><span class="c004">p</span></sup>] in ℝ<sup><span class="c004">m</span> × <span class="c004">p</span></sup>, the algorithm computes a matrix <span class="c006">A</span>=[α<sup>1</sup>,…,α<sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">p</span> × <span class="c004">n</span></sup>,
+where for each column <span class="c006">x</span> of <span class="c006">X</span>, it returns a coefficient vector α which is an approximate solution of the following NP-hard problem
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup>   s.t.   ||α||<sub>0</sub> ≤ <span class="c004">L</span>.
+    (2)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||α||<SUB>0</SUB>   s.t.   ||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP> ≤ ε.
-    (3)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell">  ||α||<sub>0</sub>   s.t.   ||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup> ≤ ε.
+    (3)</td></tr>
+</table><p>
 For efficienty reasons, the method first computes the covariance matrix
-<I><B>D</B><SUP>T</SUP><B>D</B></I>, then for each signal, it computes <I><B>D</B><SUP>T</SUP><B>x</B></I> and performs the
-decomposition with a Cholesky-based algorithm (see [<A HREF="doc_spams008.html#cotter">6</A>] for instance).</P><P>Note that mexOMP can return the “greedy” regularization path if needed (see below):
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+<span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">D</span>, then for each signal, it computes <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">x</span> and performs the
+decomposition with a Cholesky-based algorithm (see [<a href="doc_spams008.html#cotter">6</a>] for instance).</p><p>Note that mexOMP can return the “greedy” regularization path if needed (see below):
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   A=mexOMP(X,D,param);
 % or       [A path]=mexOMP(X,D,param);
 %
@@ -99,28 +99,30 @@ decomposition with a Cholesky-based algorithm (see [<A HREF="doc_spams008.html#c
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc6"></A><A NAME="htoc10">4.2</A>  Function mexOMPMask</H3><P>
+</span></pre>
+<h3 class="subsection" id="sec10">4.2  Function mexOMPMask</h3>
+<p>
 This is a variant of mexOMP with the possibility of handling a binary mask. 
-Given a binary mask <I><B>B</B></I>=[β<SUP>1</SUP>,…,β<I><SUP>n</SUP></I>] in {0,1}<SUP><I>m</I> × <I>n</I></SUP>, it returns a matrix <I><B>A</B></I>=[α<SUP>1</SUP>,…,α<I><SUP>n</SUP></I>] such that for every column <I><B>x</B></I> of <I><B>X</B></I>, β of <I><B>B</B></I>, it computes a column α of <I><B>A</B></I> by addressing
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||diag(β)(<I><B>x</B></I>−<I><B>D</B></I>α)||<SUB>2</SUB><SUP>2</SUP>   s.t.   ||α||<SUB>0</SUB> ≤ <I>L</I>,
-    (4)</TD></TR>
-</TABLE><P>
+Given a binary mask <span class="c006">B</span>=[β<sup>1</sup>,…,β<sup><span class="c004">n</span></sup>] in {0,1}<sup><span class="c004">m</span> × <span class="c004">n</span></sup>, it returns a matrix <span class="c006">A</span>=[α<sup>1</sup>,…,α<sup><span class="c004">n</span></sup>] such that for every column <span class="c006">x</span> of <span class="c006">X</span>, β of <span class="c006">B</span>, it computes a column α of <span class="c006">A</span> by addressing
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> ||diag(β)(<span class="c006">x</span>−<span class="c006">D</span>α)||<sub>2</sub><sup>2</sup>   s.t.   ||α||<sub>0</sub> ≤ <span class="c004">L</span>,
+    (4)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||α||<SUB>0</SUB>   s.t.   ||diag(β)(<I><B>x</B></I>−<I><B>D</B></I>α)||<SUB>2</SUB><SUP>2</SUP> ≤ ε</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">||β||<SUB>0</SUB></TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>m</I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">,
-    (5)</TD></TR>
-</TABLE><P>
-where diag(β) is a diagonal matrix with the entries of β on the diagonal.</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell">  ||α||<sub>0</sub>   s.t.   ||diag(β)(<span class="c006">x</span>−<span class="c006">D</span>α)||<sub>2</sub><sup>2</sup> ≤ ε</td><td class="dcell"><table class="display"><tr><td class="dcell c008">||β||<sub>0</sub></td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008"><span class="c004">m</span></td></tr>
+</table></td><td class="dcell">,
+    (5)</td></tr>
+</table><p>
+where diag(β) is a diagonal matrix with the entries of β on the diagonal.</p><pre class="verbatim"><span class="c002">% 
 % Usage:   A=mexOMPMask(X,D,B,param);
 % or       [A path]=mexOMPMask(X,D,B,param);
 %
@@ -168,48 +170,50 @@ where diag(β) is a diagonal matrix with the entries of β on the diagonal.</P><
 % Author: Julien Mairal, 2010
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc7"></A><A NAME="htoc11">4.3</A>  Function mexLasso</H3><P>
-This is a fast implementation of the LARS algorithm [<A HREF="doc_spams008.html#efron">8</A>] (variant for solving the Lasso) for solving the Lasso or Elastic-Net. Given a matrix of signals <I><B>X</B></I>=[<I><B>x</B></I><SUP>1</SUP>,…,<I><B>x</B><SUP>n</SUP></I>] in ℝ<SUP><I>m</I> × <I>n</I></SUP> and a dictionary <I><B>D</B></I> in ℝ<SUP><I>m</I> × <I>p</I></SUP>, depending on the input parameters, the algorithm returns a matrix of coefficients <I><B>A</B></I>=[α<SUP>1</SUP>,…,α<I><SUP>n</SUP></I>] in ℝ<SUP><I>p</I> × <I>n</I></SUP> such that for every column <I><B>x</B></I> of <I><B>X</B></I>, the corresponding column α of <I><B>A</B></I> is the solution of
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP>   s.t.   ||α||<SUB>1</SUB> ≤ λ,
-    (6)</TD></TR>
-</TABLE><P>
+</span></pre>
+<h3 class="subsection" id="sec11">4.3  Function mexLasso</h3>
+<p>
+This is a fast implementation of the LARS algorithm [<a href="doc_spams008.html#efron">8</a>] (variant for solving the Lasso) for solving the Lasso or Elastic-Net. Given a matrix of signals <span class="c006">X</span>=[<span class="c006">x</span><sup>1</sup>,…,<span class="c006">x</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span></sup> and a dictionary <span class="c006">D</span> in ℝ<sup><span class="c004">m</span> × <span class="c004">p</span></sup>, depending on the input parameters, the algorithm returns a matrix of coefficients <span class="c006">A</span>=[α<sup>1</sup>,…,α<sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">p</span> × <span class="c004">n</span></sup> such that for every column <span class="c006">x</span> of <span class="c006">X</span>, the corresponding column α of <span class="c006">A</span> is the solution of
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup>   s.t.   ||α||<sub>1</sub> ≤ λ,
+    (6)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||α||<SUB>1</SUB>   s.t.   ||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP> ≤ λ, <A NAME="eq:lasso2"></A>
-    (7)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell">  ||α||<sub>1</sub>   s.t.   ||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup> ≤ λ, <a id="eq:lasso2"></a>
+    (7)</td></tr>
+</table><p>
 or
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP> + λ ||α||<SUB>1</SUB> + </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">λ<SUB>2</SUB></TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||α||<SUB>2</SUB><SUP>2</SUP>. <A NAME="eq:lasso"></A>
-    (8)</TD></TR>
-</TABLE><P>
-For efficiency reasons, the method first compute the covariance matrix <I><B>D</B><SUP>T</SUP><B>D</B></I>, then
-for each signal, it computes <I><B>D</B><SUP>T</SUP><B>x</B></I> and performs the decomposition with a
-Cholesky-based algorithm (see [<A HREF="doc_spams008.html#efron">8</A>] for instance). The implementation
-has also an option to add <B>positivity constraints</B> on the solutions
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">1</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell">||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup> + λ ||α||<sub>1</sub> + </td><td class="dcell"><table class="display"><tr><td class="dcell c008">λ<sub>2</sub></td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell">||α||<sub>2</sub><sup>2</sup>. <a id="eq:lasso"></a>
+    (8)</td></tr>
+</table><p>
+For efficiency reasons, the method first compute the covariance matrix <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">D</span>, then
+for each signal, it computes <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">x</span> and performs the decomposition with a
+Cholesky-based algorithm (see [<a href="doc_spams008.html#efron">8</a>] for instance). The implementation
+has also an option to add <span class="c007">positivity constraints</span> on the solutions
 α. When the solution is very sparse and the problem size is
 reasonable, this approach can be very efficient. Moreover, it gives the
 solution with an exact precision, and its performance does not depend on the
 correlation of the dictionary elements, except when the solution is not unique
-(the algorithm breaks in this case).</P><P>Note that mexLasso can return the whole regularization path of the first signal <I><B>x</B></I><SUB>1</SUB> 
-and can handle implicitely the matrix <I><B>D</B></I> if the quantities <I><B>D</B><SUP>T</SUP><B>D</B></I> and <I><B>D</B><SUP>T</SUP><B>x</B></I> are passed
-as an argument, see below:</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+(the algorithm breaks in this case).</p><p>Note that mexLasso can return the whole regularization path of the first signal <span class="c006">x</span><sub>1</sub> 
+and can handle implicitely the matrix <span class="c006">D</span> if the quantities <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">D</span> and <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">x</span> are passed
+as an argument, see below:</p><pre class="verbatim"><span class="c002">% 
 % Usage:  [A [path]]=mexLasso(X,D,param);
 %  or:    [A [path]]=mexLasso(X,Q,q,param);
 %
@@ -269,38 +273,40 @@ as an argument, see below:</P><PRE CLASS="verbatim"><FONT SIZE=2>%
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc8"></A><A NAME="htoc12">4.4</A>  Function mexLassoWeighted</H3><P>
-This is a fast implementation of a weighted version of LARS [<A HREF="doc_spams008.html#efron">8</A>]. Given a matrix of signals <I><B>X</B></I>=[<I><B>x</B></I><SUP>1</SUP>,…,<I><B>x</B><SUP>n</SUP></I>] in ℝ<SUP><I>m</I> × <I>n</I></SUP>, a matrix of weights <I><B>W</B></I>=[<I><B>w</B></I><SUP>1</SUP>,…,<I><B>w</B><SUP>n</SUP></I>] ∈ ℝ<SUP><I>p</I> × <I>n</I></SUP>, and a dictionary <I><B>D</B></I> in ℝ<SUP><I>m</I> × <I>p</I></SUP>, depending on the input parameters, the algorithm returns a matrix of coefficients <I><B>A</B></I>=[α<SUP>1</SUP>,…,α<I><SUP>n</SUP></I>] in ℝ<SUP><I>p</I> × <I>n</I></SUP>,
-such that for every column <I><B>x</B></I> of <I><B>X</B></I>, <I><B>w</B></I> of <I><B>W</B></I>, it computes a column α of <I><B>A</B></I>, which is the solution of
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP>   s.t.   ||diag(<I><B>w</B></I>)α||<SUB>1</SUB> ≤ λ,
-    (9)</TD></TR>
-</TABLE><P>
+</span></pre>
+<h3 class="subsection" id="sec12">4.4  Function mexLassoWeighted</h3>
+<p>
+This is a fast implementation of a weighted version of LARS [<a href="doc_spams008.html#efron">8</a>]. Given a matrix of signals <span class="c006">X</span>=[<span class="c006">x</span><sup>1</sup>,…,<span class="c006">x</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span></sup>, a matrix of weights <span class="c006">W</span>=[<span class="c006">w</span><sup>1</sup>,…,<span class="c006">w</span><sup><span class="c004">n</span></sup>] ∈ ℝ<sup><span class="c004">p</span> × <span class="c004">n</span></sup>, and a dictionary <span class="c006">D</span> in ℝ<sup><span class="c004">m</span> × <span class="c004">p</span></sup>, depending on the input parameters, the algorithm returns a matrix of coefficients <span class="c006">A</span>=[α<sup>1</sup>,…,α<sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">p</span> × <span class="c004">n</span></sup>,
+such that for every column <span class="c006">x</span> of <span class="c006">X</span>, <span class="c006">w</span> of <span class="c006">W</span>, it computes a column α of <span class="c006">A</span>, which is the solution of
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup>   s.t.   ||diag(<span class="c006">w</span>)α||<sub>1</sub> ≤ λ,
+    (9)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||diag(<I><B>w</B></I>)α||<SUB>1</SUB>   s.t.   ||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP> ≤ λ,
-    (10)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell">  ||diag(<span class="c006">w</span>)α||<sub>1</sub>   s.t.   ||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup> ≤ λ,
+    (10)</td></tr>
+</table><p>
 or
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||<I><B>x</B></I>−<I><B>D</B></I>α||<SUB>2</SUB><SUP>2</SUP> + λ ||diag(<I><B>w</B></I>)α||<SUB>1</SUB>.
-    (11)</TD></TR>
-</TABLE><P>
-The implementation has also an option to add <B>positivity constraints</B> on
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">1</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell">||<span class="c006">x</span>−<span class="c006">D</span>α||<sub>2</sub><sup>2</sup> + λ ||diag(<span class="c006">w</span>)α||<sub>1</sub>.
+    (11)</td></tr>
+</table><p>
+The implementation has also an option to add <span class="c007">positivity constraints</span> on
 the solutions α. This function is potentially useful for
-implementing efficiently the randomized Lasso of [<A HREF="doc_spams008.html#meinshausen">22</A>], or reweighted-ℓ<SUB>1</SUB> schemes [<A HREF="doc_spams008.html#candes4">4</A>].</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+implementing efficiently the randomized Lasso of [<a href="doc_spams008.html#meinshausen">22</a>], or reweighted-ℓ<sub>1</sub> schemes [<a href="doc_spams008.html#candes4">4</a>].</p><pre class="verbatim"><span class="c002">% 
 % Usage:  A=mexLassoWeighted(X,D,W,param);
 %
 % Name: mexLassoWeighted.  
@@ -354,44 +360,46 @@ implementing efficiently the randomized Lasso of [<A HREF="doc_spams008.html#mei
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc9"></A><A NAME="htoc13">4.5</A>  Function mexLassoMask</H3><P>
-This is a variant of mexLasso with the possibility of adding a mask <I><B>B</B></I>=[β<SUP>1</SUP>,…,β<I><SUP>n</SUP></I>], as in mexOMPMask. 
-For every column <I><B>x</B></I> of <I><B>X</B></I>, β of <I><B>B</B></I>, it computes a column α of <I><B>A</B></I>, which is the solution of
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||diag(β)(<I><B>x</B></I>−<I><B>D</B></I>α)||<SUB>2</SUB><SUP>2</SUP>   s.t.   ||α||<SUB>1</SUB> ≤ λ,
-    (12)</TD></TR>
-</TABLE><P>
+</span></pre>
+<h3 class="subsection" id="sec13">4.5  Function mexLassoMask</h3>
+<p>
+This is a variant of mexLasso with the possibility of adding a mask <span class="c006">B</span>=[β<sup>1</sup>,…,β<sup><span class="c004">n</span></sup>], as in mexOMPMask. 
+For every column <span class="c006">x</span> of <span class="c006">X</span>, β of <span class="c006">B</span>, it computes a column α of <span class="c006">A</span>, which is the solution of
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> ||diag(β)(<span class="c006">x</span>−<span class="c006">D</span>α)||<sub>2</sub><sup>2</sup>   s.t.   ||α||<sub>1</sub> ≤ λ,
+    (12)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||α||<SUB>1</SUB>   s.t.   ||diag(β)(<I><B>x</B></I>−<I><B>D</B></I>α)||<SUB>2</SUB><SUP>2</SUP> ≤ λ</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">||β||<SUB>0</SUB></TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>m</I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">, 
-    (13)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell">  ||α||<sub>1</sub>   s.t.   ||diag(β)(<span class="c006">x</span>−<span class="c006">D</span>α)||<sub>2</sub><sup>2</sup> ≤ λ</td><td class="dcell"><table class="display"><tr><td class="dcell c008">||β||<sub>0</sub></td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008"><span class="c004">m</span></td></tr>
+</table></td><td class="dcell">, 
+    (13)</td></tr>
+</table><p>
 or
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α ∈ ℝ<I><SUP>p</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||diag(β)(<I><B>x</B></I>−<I><B>D</B></I>α)||<SUB>2</SUB><SUP>2</SUP> + λ </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">||β||<SUB>0</SUB></TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>m</I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">||α||<SUB>1</SUB> + </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">λ<SUB>2</SUB></TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||α||<SUB>2</SUB><SUP>2</SUP>. 
-    (14)</TD></TR>
-</TABLE><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α ∈ ℝ<sup><span class="c004">p</span></sup></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">1</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell">||diag(β)(<span class="c006">x</span>−<span class="c006">D</span>α)||<sub>2</sub><sup>2</sup> + λ </td><td class="dcell"><table class="display"><tr><td class="dcell c008">||β||<sub>0</sub></td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008"><span class="c004">m</span></td></tr>
+</table></td><td class="dcell">||α||<sub>1</sub> + </td><td class="dcell"><table class="display"><tr><td class="dcell c008">λ<sub>2</sub></td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell">||α||<sub>2</sub><sup>2</sup>. 
+    (14)</td></tr>
+</table><pre class="verbatim"><span class="c002">% 
 % Usage:   A=mexLassoMask(X,D,B,param);
 %
 % Name: mexLassoMask
@@ -442,13 +450,15 @@ or
 % Author: Julien Mairal, 2010
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc10"></A><A NAME="htoc14">4.6</A>  Function mexCD</H3><P>
-Coordinate-descent approach for solving Eq. (<A HREF="#eq:lasso">8</A>) and
-Eq. (<A HREF="#eq:lasso2">7</A>). Note that unlike mexLasso, it is not implemented to solve the Elastic-Net formulation.
-To solve Eq. (<A HREF="#eq:lasso2">7</A>), the algorithm solves a
-sequence of problems of the form (<A HREF="#eq:lasso">8</A>) using simple heuristics.
+</span></pre>
+<h3 class="subsection" id="sec14">4.6  Function mexCD</h3>
+<p>
+Coordinate-descent approach for solving Eq. (<a href="#eq%3Alasso">8</a>) and
+Eq. (<a href="#eq%3Alasso2">7</a>). Note that unlike mexLasso, it is not implemented to solve the Elastic-Net formulation.
+To solve Eq. (<a href="#eq%3Alasso2">7</a>), the algorithm solves a
+sequence of problems of the form (<a href="#eq%3Alasso">8</a>) using simple heuristics.
 Coordinate descent is very simple and in practice very powerful. It performs
-better when the correlation between the dictionary elements is small. </P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+better when the correlation between the dictionary elements is small. </p><pre class="verbatim"><span class="c002">% 
 % Usage:   A=mexCD(X,D,A0,param);
 %
 % Name: mexCD
@@ -498,24 +508,26 @@ better when the correlation between the dictionary elements is small. </P><PRE C
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc11"></A><A NAME="htoc15">4.7</A>  Function mexSOMP</H3><P>
-This is a fast implementation of the Simultaneous Orthogonal Matching Pursuit algorithm. Given a set of matrices <I><B>X</B></I>=[<I><B>X</B></I><SUP>1</SUP>,…,<I><B>X</B><SUP>n</SUP></I>] in ℝ<SUP><I>m</I> × <I>N</I></SUP>, where the <I><B>X</B><SUP>i</SUP></I>’s are in ℝ<SUP><I>m</I> × <I>n<SUB>i</SUB></I></SUP>, and a dictionary <I><B>D</B></I> in ℝ<SUP><I>m</I> × <I>p</I></SUP>, the algorithm returns a matrix of coefficients <I><B>A</B></I>=[<I><B>A</B></I><SUP>1</SUP>,…,<I><B>A</B><SUP>n</SUP></I>] in ℝ<SUP><I>p</I> × <I>N</I></SUP> which is an approximate solution of the following NP-hard problem
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-∀ <I>i</I>   </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>A</B><SUP>i</SUP></I> ∈ ℝ<SUP><I>p</I> × <I>n<SUB>i</SUB></I></SUP></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>X</B><SUP>i</SUP></I>−<I><B>DA</B><SUP>i</SUP></I>||<I><SUB>F</SUB></I><SUP>2</SUP>   s.t.   ||<I><B>A</B><SUP>i</SUP></I>||<SUB>0,∞</SUB> ≤ <I>L</I>.
-    (15)</TD></TR>
-</TABLE><P>
+</span></pre>
+<h3 class="subsection" id="sec15">4.7  Function mexSOMP</h3>
+<p>
+This is a fast implementation of the Simultaneous Orthogonal Matching Pursuit algorithm. Given a set of matrices <span class="c006">X</span>=[<span class="c006">X</span><sup>1</sup>,…,<span class="c006">X</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">m</span> × <span class="c004">N</span></sup>, where the <span class="c006">X</span><sup><span class="c004">i</span></sup>’s are in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span><sub><span class="c004">i</span></sub></sup>, and a dictionary <span class="c006">D</span> in ℝ<sup><span class="c004">m</span> × <span class="c004">p</span></sup>, the algorithm returns a matrix of coefficients <span class="c006">A</span>=[<span class="c006">A</span><sup>1</sup>,…,<span class="c006">A</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">p</span> × <span class="c004">N</span></sup> which is an approximate solution of the following NP-hard problem
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+∀ <span class="c004">i</span>   </td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">A</span><sup><span class="c004">i</span></sup> ∈ ℝ<sup><span class="c004">p</span> × <span class="c004">n</span><sub><span class="c004">i</span></sub></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">X</span><sup><span class="c004">i</span></sup>−<span class="c006">DA</span><sup><span class="c004">i</span></sup>||<sub><span class="c004">F</span></sub><sup>2</sup>   s.t.   ||<span class="c006">A</span><sup><span class="c004">i</span></sup>||<sub>0,∞</sub> ≤ <span class="c004">L</span>.
+    (15)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-∀ <I>i</I>   </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>A</B><SUP>i</SUP></I> ∈ ℝ<SUP><I>p</I> × <I>n<SUB>i</SUB></I></SUP></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||<I><B>A</B><SUP>i</SUP></I>||<SUB>0,∞</SUB>   s.t.   ||<I><B>X</B><SUP>i</SUP></I>−<I><B>DA</B><SUP>i</SUP></I>||<I><SUB>F</SUB></I><SUP>2</SUP> ≤ ε <I>n<SUB>i</SUB></I>.
-    (16)</TD></TR>
-</TABLE><P>
-To be efficient, the method first compute the covariance matrix <I><B>D</B><SUP>T</SUP><B>D</B></I>, then for each signal, it computes <I><B>D</B><SUP>T</SUP><B>X</B><SUP>i</SUP></I> and performs the decomposition with a Cholesky-based algorithm.</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+∀ <span class="c004">i</span>   </td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">A</span><sup><span class="c004">i</span></sup> ∈ ℝ<sup><span class="c004">p</span> × <span class="c004">n</span><sub><span class="c004">i</span></sub></sup></td></tr>
+</table></td><td class="dcell">  ||<span class="c006">A</span><sup><span class="c004">i</span></sup>||<sub>0,∞</sub>   s.t.   ||<span class="c006">X</span><sup><span class="c004">i</span></sup>−<span class="c006">DA</span><sup><span class="c004">i</span></sup>||<sub><span class="c004">F</span></sub><sup>2</sup> ≤ ε <span class="c004">n</span><sub><span class="c004">i</span></sub>.
+    (16)</td></tr>
+</table><p>
+To be efficient, the method first compute the covariance matrix <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">D</span>, then for each signal, it computes <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">X</span><sup><span class="c004">i</span></sup> and performs the decomposition with a Cholesky-based algorithm.</p><pre class="verbatim"><span class="c002">% 
 % Usage:   alpha=mexSOMP(X,D,list_groups,param);
 %
 % Name: mexSOMP
@@ -566,27 +578,29 @@ To be efficient, the method first compute the covariance matrix <I><B>D</B><SUP>
 % Author: Julien Mairal, 2010
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc12"></A><A NAME="htoc16">4.8</A>  Function mexL1L2BCD</H3><P>
-This is a fast implementation of a simultaneous signal decomposition formulation. Given a set of matrices <I><B>X</B></I>=[<I><B>X</B></I><SUP>1</SUP>,…,<I><B>X</B><SUP>n</SUP></I>] in ℝ<SUP><I>m</I> × <I>N</I></SUP>, where the <I><B>X</B><SUP>i</SUP></I>’s are in ℝ<SUP><I>m</I> × <I>n<SUB>i</SUB></I></SUP>, and a dictionary <I><B>D</B></I> in ℝ<SUP><I>m</I> × <I>p</I></SUP>, the algorithm returns a matrix of coefficients <I><B>A</B></I>=[<I><B>A</B></I><SUP>1</SUP>,…,<I><B>A</B><SUP>n</SUP></I>] in ℝ<SUP><I>p</I> × <I>N</I></SUP> which is an approximate solution of the following NP-hard problem
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-∀ <I>i</I>   </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>A</B><SUP>i</SUP></I> ∈ ℝ<SUP><I>p</I> × <I>n<SUB>i</SUB></I></SUP></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>X</B><SUP>i</SUP></I>−<I><B>DA</B><SUP>i</SUP></I>||<I><SUB>F</SUB></I><SUP>2</SUP>   s.t.   ||<I><B>A</B><SUP>i</SUP></I>||<SUB>1,2</SUB> ≤ </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">λ</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>n<SUB>i</SUB></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell">.
-    (17)</TD></TR>
-</TABLE><P>
+</span></pre>
+<h3 class="subsection" id="sec16">4.8  Function mexL1L2BCD</h3>
+<p>
+This is a fast implementation of a simultaneous signal decomposition formulation. Given a set of matrices <span class="c006">X</span>=[<span class="c006">X</span><sup>1</sup>,…,<span class="c006">X</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">m</span> × <span class="c004">N</span></sup>, where the <span class="c006">X</span><sup><span class="c004">i</span></sup>’s are in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span><sub><span class="c004">i</span></sub></sup>, and a dictionary <span class="c006">D</span> in ℝ<sup><span class="c004">m</span> × <span class="c004">p</span></sup>, the algorithm returns a matrix of coefficients <span class="c006">A</span>=[<span class="c006">A</span><sup>1</sup>,…,<span class="c006">A</span><sup><span class="c004">n</span></sup>] in ℝ<sup><span class="c004">p</span> × <span class="c004">N</span></sup> which is an approximate solution of the following NP-hard problem
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+∀ <span class="c004">i</span>   </td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">A</span><sup><span class="c004">i</span></sup> ∈ ℝ<sup><span class="c004">p</span> × <span class="c004">n</span><sub><span class="c004">i</span></sub></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">X</span><sup><span class="c004">i</span></sup>−<span class="c006">DA</span><sup><span class="c004">i</span></sup>||<sub><span class="c004">F</span></sub><sup>2</sup>   s.t.   ||<span class="c006">A</span><sup><span class="c004">i</span></sup>||<sub>1,2</sub> ≤ </td><td class="dcell"><table class="display"><tr><td class="dcell c008">λ</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008"><span class="c004">n</span><sub><span class="c004">i</span></sub></td></tr>
+</table></td><td class="dcell">.
+    (17)</td></tr>
+</table><p>
 or 
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-∀ <I>i</I>   </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>A</B><SUP>i</SUP></I> ∈ ℝ<SUP><I>p</I> × <I>n<SUB>i</SUB></I></SUP></TD></TR>
-</TABLE></TD><TD CLASS="dcell">  ||<I><B>A</B><SUP>i</SUP></I>||<SUB>1,2</SUB>   s.t.   ||<I><B>X</B><SUP>i</SUP></I>−<I><B>DA</B><SUP>i</SUP></I>||<I><SUB>F</SUB></I><SUP>2</SUP> ≤ λ <I>n<SUB>i</SUB></I>.
-    (18)</TD></TR>
-</TABLE><P>
-To be efficient, the method first compute the covariance matrix <I><B>D</B><SUP>T</SUP><B>D</B></I>, then for each signal, it computes <I><B>D</B><SUP>T</SUP><B>X</B><SUP>i</SUP></I> and performs the decomposition with a Cholesky-based algorithm.</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+∀ <span class="c004">i</span>   </td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">A</span><sup><span class="c004">i</span></sup> ∈ ℝ<sup><span class="c004">p</span> × <span class="c004">n</span><sub><span class="c004">i</span></sub></sup></td></tr>
+</table></td><td class="dcell">  ||<span class="c006">A</span><sup><span class="c004">i</span></sup>||<sub>1,2</sub>   s.t.   ||<span class="c006">X</span><sup><span class="c004">i</span></sup>−<span class="c006">DA</span><sup><span class="c004">i</span></sup>||<sub><span class="c004">F</span></sub><sup>2</sup> ≤ λ <span class="c004">n</span><sub><span class="c004">i</span></sub>.
+    (18)</td></tr>
+</table><p>
+To be efficient, the method first compute the covariance matrix <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">D</span>, then for each signal, it computes <span class="c006">D</span><sup><span class="c004">T</span></sup><span class="c006">X</span><sup><span class="c004">i</span></sup> and performs the decomposition with a Cholesky-based algorithm.</p><pre class="verbatim"><span class="c002">% 
 % Usage:   alpha=mexL1L2BCD(X,D,alpha0,list_groups,param);
 %
 % Name: mexL1L2BCD
@@ -634,54 +648,56 @@ To be efficient, the method first compute the covariance matrix <I><B>D</B><SUP>
 % Author: Julien Mairal, 2010
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc13"></A><A NAME="htoc17">4.9</A>  Function mexSparseProject</H3><P>
+</span></pre>
+<h3 class="subsection" id="sec17">4.9  Function mexSparseProject</h3>
+<p>
 This is a multi-purpose function, implementing fast algorithms for projecting
 on convex sets, but it also solves the fused lasso signal approximation
-problem. The proposed method is detailed in [<A HREF="doc_spams008.html#mairal9">19</A>]. The main problems
+problem. The proposed method is detailed in [<a href="doc_spams008.html#mairal9">19</a>]. The main problems
 addressed by this function are the following: Given a matrix
-<I><B>U</B></I>=[<I><B>u</B></I><SUB>1</SUB>,…,<I><B>u</B><SUB>n</SUB></I>] in ℝ<SUP><I>m</I> × <I>n</I></SUP>, it finds a matrix
-<I><B>V</B></I>=[<I><B>v</B></I><SUB>1</SUB>,…,<I><B>v</B><SUB>n</SUB></I>] in ℝ<SUP><I>m</I> × <I>n</I></SUP> so that for all column <I><B>u</B></I> of <I><B>U</B></I>,
-it computes a column <I><B>v</B></I> of <I><B>V</B></I> solving
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>v</B></I> ∈ ℝ<I><SUP>m</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>u</B></I>−<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>    s.t.   ||<I><B>v</B></I>||<SUB>1</SUB> ≤ τ,
-    (19)</TD></TR>
-</TABLE><P>
+<span class="c006">U</span>=[<span class="c006">u</span><sub>1</sub>,…,<span class="c006">u</span><sub><span class="c004">n</span></sub>] in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span></sup>, it finds a matrix
+<span class="c006">V</span>=[<span class="c006">v</span><sub>1</sub>,…,<span class="c006">v</span><sub><span class="c004">n</span></sub>] in ℝ<sup><span class="c004">m</span> × <span class="c004">n</span></sup> so that for all column <span class="c006">u</span> of <span class="c006">U</span>,
+it computes a column <span class="c006">v</span> of <span class="c006">V</span> solving
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">v</span> ∈ ℝ<sup><span class="c004">m</span></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">u</span>−<span class="c006">v</span>||<sub>2</sub><sup>2</sup>    s.t.   ||<span class="c006">v</span>||<sub>1</sub> ≤ τ,
+    (19)</td></tr>
+</table><p>
 or
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>v</B></I> ∈ ℝ<I><SUP>m</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>u</B></I>−<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>    s.t.   λ<SUB>1</SUB>||<I><B>v</B></I>||<SUB>1</SUB> +λ<SUB>2</SUB>||<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>≤ τ,
-    (20)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">v</span> ∈ ℝ<sup><span class="c004">m</span></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">u</span>−<span class="c006">v</span>||<sub>2</sub><sup>2</sup>    s.t.   λ<sub>1</sub>||<span class="c006">v</span>||<sub>1</sub> +λ<sub>2</sub>||<span class="c006">v</span>||<sub>2</sub><sup>2</sup>≤ τ,
+    (20)</td></tr>
+</table><p>
 or
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>v</B></I> ∈ ℝ<I><SUP>m</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>u</B></I>−<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>    s.t.   λ<SUB>1</SUB>||<I><B>v</B></I>||<SUB>1</SUB> +λ<SUB>2</SUB>||<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>+ λ<SUB>3</SUB> <I>FL</I>(<I><B>v</B></I>) ≤ τ,
-    (21)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">v</span> ∈ ℝ<sup><span class="c004">m</span></sup></td></tr>
+</table></td><td class="dcell"> ||<span class="c006">u</span>−<span class="c006">v</span>||<sub>2</sub><sup>2</sup>    s.t.   λ<sub>1</sub>||<span class="c006">v</span>||<sub>1</sub> +λ<sub>2</sub>||<span class="c006">v</span>||<sub>2</sub><sup>2</sup>+ λ<sub>3</sub> <span class="c004">FL</span>(<span class="c006">v</span>) ≤ τ,
+    (21)</td></tr>
+</table><p>
 or
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>v</B></I> ∈ ℝ<I><SUP>m</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell">||<I><B>u</B></I>−<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP> + λ<SUB>1</SUB>||<I><B>v</B></I>||<SUB>1</SUB> +λ<SUB>2</SUB>||<I><B>v</B></I>||<SUB>2</SUB><SUP>2</SUP>+ λ<SUB>3</SUB> <I>FL</I>(<I><B>v</B></I>).
-    (22)</TD></TR>
-</TABLE><P>
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">v</span> ∈ ℝ<sup><span class="c004">m</span></sup></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">1</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell">||<span class="c006">u</span>−<span class="c006">v</span>||<sub>2</sub><sup>2</sup> + λ<sub>1</sub>||<span class="c006">v</span>||<sub>1</sub> +λ<sub>2</sub>||<span class="c006">v</span>||<sub>2</sub><sup>2</sup>+ λ<sub>3</sub> <span class="c004">FL</span>(<span class="c006">v</span>).
+    (22)</td></tr>
+</table><p>
 Note that for the two last cases, the method performs a small approximation.
 The method follows the regularization path, goes from one kink to another, and 
 stop whenever the constraint is not satisfied anymore. The solution returned 
 by the algorithm is the one obtained at the last kink of the regularization path,
 which is in practice close, but not exactly the same as the solution.
-This will be corrected in a future release of the toolbox.</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+This will be corrected in a future release of the toolbox.</p><pre class="verbatim"><span class="c002">% 
 % Usage:  V=mexSparseProject(U,param);
 %
 % Name: mexSparseProject
@@ -732,9 +748,10 @@ This will be corrected in a future release of the toolbox.</P><PRE CLASS="verbat
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><HR>
-<A HREF="doc_spams003.html"><IMG SRC="previous_motif.gif" ALT="Previous"></A>
-<A HREF="index.html"><IMG SRC="contents_motif.gif" ALT="Up"></A>
-<A HREF="doc_spams005.html"><IMG SRC="next_motif.gif" ALT="Next"></A>
-</BODY>
-</HTML>
+</span></pre>
+<hr>
+<a href="doc_spams003.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="doc_spams005.html"><img src="next_motif.gif" alt="Next"></a>
+</body>
+</html>

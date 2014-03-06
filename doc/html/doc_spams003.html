@@ -1,63 +1,63 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-            "http://www.w3.org/TR/REC-html40/loose.dtd">
-<HTML>
-<HEAD>
-
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META name="GENERATOR" content="hevea 1.10">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.06">
 
 <META name="Author" content="Julien Mairal">
-<link rel="stylesheet" href="doc_spams.css">
-<LINK rel="stylesheet" type="text/css" href="doc_spams.css">
-<TITLE>Dictionary Learning and Matrix Factorization Toolbox</TITLE>
-</HEAD>
-<BODY >
-<A HREF="doc_spams002.html"><IMG SRC="previous_motif.gif" ALT="Previous"></A>
-<A HREF="index.html"><IMG SRC="contents_motif.gif" ALT="Up"></A>
-<A HREF="doc_spams004.html"><IMG SRC="next_motif.gif" ALT="Next"></A>
-<HR>
-<H2 CLASS="section"><A NAME="htoc3">3</A>  Dictionary Learning and Matrix Factorization Toolbox</H2><UL>
-<LI><A HREF="doc_spams003.html#toc1">Function mexTrainDL</A>
-</LI><LI><A HREF="doc_spams003.html#toc2">Function mexTrainDL_Memory</A>
-</LI><LI><A HREF="doc_spams003.html#toc3">Function nmf</A>
-</LI><LI><A HREF="doc_spams003.html#toc4">Function nnsc</A>
-</LI></UL>
-<P>
-This is the section for dictionary learning and matrix factorization, corresponding to [<A HREF="doc_spams008.html#mairal7">18</A>, <A HREF="doc_spams008.html#mairal9">19</A>].</P><H3 CLASS="subsection"><A NAME="toc1"></A><A NAME="htoc4">3.1</A>  Function mexTrainDL</H3><P>
-This is the main function of the toolbox, implementing the learning algorithms of [<A HREF="doc_spams008.html#mairal9">19</A>]. 
-Given a training set <I><B>x</B></I><SUP>1</SUP>,…, . It aims at solving
-</P><TABLE CLASS="display dcenter"><TR VALIGN="middle"><TD CLASS="dcell">
-</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I><B>D</B></I> ∈ <FONT COLOR=red><I>C</I></FONT></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">lim</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>n</I> → +∞</TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>n</I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center"><I>n</I></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><FONT SIZE=6>∑</FONT></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center"><I>i</I>=1</TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">&nbsp;</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">min</TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">α<I><SUP>i</SUP></I></TD></TR>
-</TABLE></TD><TD CLASS="dcell"> </TD><TD CLASS="dcell">⎛<BR>
-⎜<BR>
-⎝</TD><TD CLASS="dcell"><TABLE CLASS="display"><TR><TD CLASS="dcell" ALIGN="center">1</TD></TR>
-<TR><TD CLASS="hbar"></TD></TR>
-<TR><TD CLASS="dcell" ALIGN="center">2</TD></TR>
-</TABLE></TD><TD CLASS="dcell"> ||<I><B>x</B><SUP>i</SUP></I>−<I><B>D</B></I>α<I><SUP>i</SUP></I>||<SUB>2</SUB><SUP>2</SUP> + ψ(α<I><SUP>i</SUP></I>)</TD><TD CLASS="dcell">⎞<BR>
-⎟<BR>
-⎠</TD><TD CLASS="dcell">.
-    (1)</TD></TR>
-</TABLE><P>
-ψ is a sparsity-inducing regularizer and <FONT COLOR=red><I>C</I></FONT> is a constraint set for the dictionary. As shown in [<A HREF="doc_spams008.html#mairal9">19</A>] 
-and in the help file below, various combinations can be used for ψ and <FONT COLOR=red><I>C</I></FONT> for solving different matrix factorization problems.
-What is more, positivity constraints can be added to α as well. The function admits several modes for choosing the optimization parameters, using the parameter-free strategy proposed in [<A HREF="doc_spams008.html#mairal7">18</A>], or using the parameters <I>t</I><SUB>0</SUB> and ρ presented
-in [<A HREF="doc_spams008.html#mairal9">19</A>]. <B>Note that for problems of a reasonable size, and when ψ is the ℓ<SUB>1</SUB>-norm, 
-the function mexTrainDL_Memory can be faster but uses more memory.</B> 
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+<link rel="stylesheet" href="doc_spams.css"><link rel="stylesheet" type="text/css" href="doc_spams.css">
+<title>Dictionary Learning and Matrix Factorization Toolbox</title>
+</head>
+<body>
+<a href="doc_spams002.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="doc_spams004.html"><img src="next_motif.gif" alt="Next"></a>
+<hr>
+<h2 class="section" id="sec3">3  Dictionary Learning and Matrix Factorization Toolbox</h2>
+<ul>
+<li><a href="doc_spams003.html#sec4">Function mexTrainDL</a>
+</li><li><a href="doc_spams003.html#sec5">Function mexTrainDL_Memory</a>
+</li><li><a href="doc_spams003.html#sec6">Function nmf</a>
+</li><li><a href="doc_spams003.html#sec7">Function nnsc</a>
+</li></ul>
+<p>
+This is the section for dictionary learning and matrix factorization, corresponding to [<a href="doc_spams008.html#mairal7">18</a>, <a href="doc_spams008.html#mairal9">19</a>].</p>
+<h3 class="subsection" id="sec4">3.1  Function mexTrainDL</h3>
+<p>
+This is the main function of the toolbox, implementing the learning algorithms of [<a href="doc_spams008.html#mairal9">19</a>]. 
+Given a training set <span class="c006">x</span><sup>1</sup>,…, . It aims at solving
+</p><table class="display dcenter"><tr class="c012"><td class="dcell">
+</td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008"><span class="c006">D</span> ∈ <span class="c005">C</span></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">lim</td></tr>
+<tr><td class="dcell c008"><span class="c004">n</span> → +∞</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">1</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008"><span class="c004">n</span></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008"><span class="c004">n</span></td></tr>
+<tr><td class="dcell c008"><span class="c003">∑</span></td></tr>
+<tr><td class="dcell c008"><span class="c004">i</span>=1</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell c008">&nbsp;</td></tr>
+<tr><td class="dcell c008">min</td></tr>
+<tr><td class="dcell c008">α<sup><span class="c004">i</span></sup></td></tr>
+</table></td><td class="dcell"> </td><td class="dcell">⎛<br>
+⎜<br>
+⎝</td><td class="dcell"><table class="display"><tr><td class="dcell c008">1</td></tr>
+<tr><td class="hbar"></td></tr>
+<tr><td class="dcell c008">2</td></tr>
+</table></td><td class="dcell"> ||<span class="c006">x</span><sup><span class="c004">i</span></sup>−<span class="c006">D</span>α<sup><span class="c004">i</span></sup>||<sub>2</sub><sup>2</sup> + ψ(α<sup><span class="c004">i</span></sup>)</td><td class="dcell">⎞<br>
+⎟<br>
+⎠</td><td class="dcell">.
+    (1)</td></tr>
+</table><p>
+ψ is a sparsity-inducing regularizer and <span class="c005">C</span> is a constraint set for the dictionary. As shown in [<a href="doc_spams008.html#mairal9">19</a>] 
+and in the help file below, various combinations can be used for ψ and <span class="c005">C</span> for solving different matrix factorization problems.
+What is more, positivity constraints can be added to α as well. The function admits several modes for choosing the optimization parameters, using the parameter-free strategy proposed in [<a href="doc_spams008.html#mairal7">18</a>], or using the parameters <span class="c004">t</span><sub>0</sub> and ρ presented
+in [<a href="doc_spams008.html#mairal9">19</a>]. <span class="c007">Note that for problems of a reasonable size, and when </span>ψ<span class="c007"> is the </span>ℓ<sub>1</sub><span class="c007">-norm, 
+the function mexTrainDL_Memory can be faster but uses more memory.</span> 
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   [D [model]]=mexTrainDL(X,param[,model]);
 %          model is optional
 %
@@ -168,13 +168,15 @@ the function mexTrainDL_Memory can be faster but uses more memory.</B>
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc2"></A><A NAME="htoc5">3.2</A>  Function mexTrainDL_Memory</H3><P>
+</span></pre>
+<h3 class="subsection" id="sec5">3.2  Function mexTrainDL_Memory</h3>
+<p>
 Memory-consuming version of mexTrainDL. This function is well adapted to small/medium-size problems:
 It requires storing all the coefficients α and is therefore impractical
 for very large datasets. However, in many situations, one can afford this memory cost and it is better to use this method, which 
 is faster than mexTrainDL.
 Note that unlike mexTrainDL this function does not allow warm-restart.
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   [D]=mexTrainDL(X,param);
 %
 % Name: mexTrainDL_Memory
@@ -268,11 +270,13 @@ Note that unlike mexTrainDL this function does not allow warm-restart.
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc3"></A><A NAME="htoc6">3.3</A>  Function nmf</H3><P>
+</span></pre>
+<h3 class="subsection" id="sec6">3.3  Function nmf</h3>
+<p>
 This function is an example on how to use the function mexTrainDL for the
-problem of non-negative matrix factorization formulated in [<A HREF="doc_spams008.html#lee2">15</A>]. Note
+problem of non-negative matrix factorization formulated in [<a href="doc_spams008.html#lee2">15</a>]. Note
 that mexTrainDL can be replaced by mexTrainDL_Memory in this function for
-small or medium datasets.</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+small or medium datasets.</p><pre class="verbatim"><span class="c002">% 
 % Usage:   [U [,V]]=nmf(X,param);
 %
 % Name: nmf
@@ -351,11 +355,13 @@ if nargout == 2
    end
 end
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc4"></A><A NAME="htoc7">3.4</A>  Function nnsc</H3><P>
+</span></pre>
+<h3 class="subsection" id="sec7">3.4  Function nnsc</h3>
+<p>
 This function is an example on how to use the function mexTrainDL for the
-problem of non-negative sparse coding as defined in [<A HREF="doc_spams008.html#hoyer">12</A>]. Note that
+problem of non-negative sparse coding as defined in [<a href="doc_spams008.html#hoyer">12</a>]. Note that
 mexTrainDL can be replaced by mexTrainDL_Memory in this function for small or
-medium datasets.</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+medium datasets.</p><pre class="verbatim"><span class="c002">% 
 % Usage:   [U [,V]]=nnsc(X,param);
 %
 % Name: nmf
@@ -426,9 +432,10 @@ if nargout == 2
    V=mexLasso(X,U,param);
 end
 
-</FONT></PRE><HR>
-<A HREF="doc_spams002.html"><IMG SRC="previous_motif.gif" ALT="Previous"></A>
-<A HREF="index.html"><IMG SRC="contents_motif.gif" ALT="Up"></A>
-<A HREF="doc_spams004.html"><IMG SRC="next_motif.gif" ALT="Next"></A>
-</BODY>
-</HTML>
+</span></pre>
+<hr>
+<a href="doc_spams002.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="doc_spams004.html"><img src="next_motif.gif" alt="Next"></a>
+</body>
+</html>

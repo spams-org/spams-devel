@@ -1,38 +1,37 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-            "http://www.w3.org/TR/REC-html40/loose.dtd">
-<HTML>
-<HEAD>
-
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META name="GENERATOR" content="hevea 1.10">
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.06">
 
 <META name="Author" content="Julien Mairal">
-<link rel="stylesheet" href="doc_spams.css">
-<LINK rel="stylesheet" type="text/css" href="doc_spams.css">
-<TITLE>Miscellaneous Functions</TITLE>
-</HEAD>
-<BODY >
-<A HREF="doc_spams005.html"><IMG SRC="previous_motif.gif" ALT="Previous"></A>
-<A HREF="index.html"><IMG SRC="contents_motif.gif" ALT="Up"></A>
-<A HREF="doc_spams007.html"><IMG SRC="next_motif.gif" ALT="Next"></A>
-<HR>
-<H2 CLASS="section"><A NAME="htoc33">6</A>  Miscellaneous Functions</H2><UL>
-<LI><A HREF="doc_spams006.html#toc22">Function mexConjGrad</A>
-</LI><LI><A HREF="doc_spams006.html#toc23">Function mexBayer</A>
-</LI><LI><A HREF="doc_spams006.html#toc24">Function mexCalcAAt</A>
-</LI><LI><A HREF="doc_spams006.html#toc25">Function mexCalcXAt</A>
-</LI><LI><A HREF="doc_spams006.html#toc26">Function mexCalcXY</A>
-</LI><LI><A HREF="doc_spams006.html#toc27">Function mexCalcXYt</A>
-</LI><LI><A HREF="doc_spams006.html#toc28">Function mexCalcXtY</A>
-</LI><LI><A HREF="doc_spams006.html#toc29">Function mexInvSym</A>
-</LI><LI><A HREF="doc_spams006.html#toc30">Function mexNormalize</A>
-</LI><LI><A HREF="doc_spams006.html#toc31">Function mexSort</A>
-</LI><LI><A HREF="doc_spams006.html#toc32">Function mexDisplayPatches</A>
-</LI></UL>
-<H3 CLASS="subsection"><A NAME="toc22"></A><A NAME="htoc34">6.1</A>  Function mexConjGrad</H3><P>Implementation of a conjugate gradient for solving a linear system <B><I>Ax</I></B>=<I><B>b</B></I>
-when <I><B>A</B></I> is positive definite. In some cases, it is faster than the Matlab
-function <CODE>pcg</CODE>, especially when the library uses the Intel Math Kernel Library.
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+<link rel="stylesheet" href="doc_spams.css"><link rel="stylesheet" type="text/css" href="doc_spams.css">
+<title>Miscellaneous Functions</title>
+</head>
+<body>
+<a href="doc_spams005.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="doc_spams007.html"><img src="next_motif.gif" alt="Next"></a>
+<hr>
+<h2 class="section" id="sec33">6  Miscellaneous Functions</h2>
+<ul>
+<li><a href="doc_spams006.html#sec34">Function mexConjGrad</a>
+</li><li><a href="doc_spams006.html#sec35">Function mexBayer</a>
+</li><li><a href="doc_spams006.html#sec36">Function mexCalcAAt</a>
+</li><li><a href="doc_spams006.html#sec37">Function mexCalcXAt</a>
+</li><li><a href="doc_spams006.html#sec38">Function mexCalcXY</a>
+</li><li><a href="doc_spams006.html#sec39">Function mexCalcXYt</a>
+</li><li><a href="doc_spams006.html#sec40">Function mexCalcXtY</a>
+</li><li><a href="doc_spams006.html#sec41">Function mexInvSym</a>
+</li><li><a href="doc_spams006.html#sec42">Function mexNormalize</a>
+</li><li><a href="doc_spams006.html#sec43">Function mexSort</a>
+</li><li><a href="doc_spams006.html#sec44">Function mexDisplayPatches</a>
+</li></ul>
+<h3 class="subsection" id="sec34">6.1  Function mexConjGrad</h3>
+<p>Implementation of a conjugate gradient for solving a linear system <span class="c006">Ax</span>=<span class="c006">b</span>
+when <span class="c006">A</span> is positive definite. In some cases, it is faster than the Matlab
+function <code>pcg</code>, especially when the library uses the Intel Math Kernel Library.
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   x =mexConjGrad(A,b,x0,tol,itermax)
 %
 % Name: mexConjGrad
@@ -51,8 +50,10 @@ function <CODE>pcg</CODE>, especially when the library uses the Intel Math Kerne
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc23"></A><A NAME="htoc35">6.2</A>  Function mexBayer</H3><P>Apply a Bayer pattern to an input image
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec35">6.2  Function mexBayer</h3>
+<p>Apply a Bayer pattern to an input image
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   Y =mexBayer(X,offset);
 %
 % Name: mexBayer
@@ -68,8 +69,10 @@ function <CODE>pcg</CODE>, especially when the library uses the Intel Math Kerne
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc24"></A><A NAME="htoc36">6.3</A>  Function mexCalcAAt</H3><P>For an input sparse matrix <I><B>A</B></I>, this function returns <I><B>AA</B><SUP>T</SUP></I>. For some reasons, when <I><B>A</B></I> has a lot more columns than rows, this function can be much faster than the equivalent matlab command <CODE>X*A'</CODE>. 
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec36">6.3  Function mexCalcAAt</h3>
+<p>For an input sparse matrix <span class="c006">A</span>, this function returns <span class="c006">AA</span><sup><span class="c004">T</span></sup>. For some reasons, when <span class="c006">A</span> has a lot more columns than rows, this function can be much faster than the equivalent matlab command <code>X*A'</code>. 
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   AAt =mexCalcAAt(A);
 %
 % Name: mexCalcAAt
@@ -86,9 +89,11 @@ function <CODE>pcg</CODE>, especially when the library uses the Intel Math Kerne
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc25"></A><A NAME="htoc37">6.4</A>  Function mexCalcXAt</H3><P>
-For an input sparse matrix <I><B>A</B></I> and a matrix <I><B>X</B></I>, this function returns <I><B>XA</B><SUP>T</SUP></I>. For some reasons, when <I><B>A</B></I> has a lot more columns than rows, this function can be much faster than the equivalent matlab command <CODE>X*A'</CODE>. 
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec37">6.4  Function mexCalcXAt</h3>
+<p>
+For an input sparse matrix <span class="c006">A</span> and a matrix <span class="c006">X</span>, this function returns <span class="c006">XA</span><sup><span class="c004">T</span></sup>. For some reasons, when <span class="c006">A</span> has a lot more columns than rows, this function can be much faster than the equivalent matlab command <code>X*A'</code>. 
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   XAt =mexCalcXAt(X,A);
 %
 % Name: mexCalcXAt
@@ -105,9 +110,11 @@ For an input sparse matrix <I><B>A</B></I> and a matrix <I><B>X</B></I>, this fu
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc26"></A><A NAME="htoc38">6.5</A>  Function mexCalcXY</H3><P>
-For two input matrices <I><B>X</B></I> and <I><B>Y</B></I>, this function returns <B><I>XY</I></B>. 
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec38">6.5  Function mexCalcXY</h3>
+<p>
+For two input matrices <span class="c006">X</span> and <span class="c006">Y</span>, this function returns <span class="c006">XY</span>. 
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   Z =mexCalcXY(X,Y);
 %
 % Name: mexCalcXY
@@ -122,9 +129,11 @@ For two input matrices <I><B>X</B></I> and <I><B>Y</B></I>, this function return
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc27"></A><A NAME="htoc39">6.6</A>  Function mexCalcXYt</H3><P>
-For two input matrices <I><B>X</B></I> and <I><B>Y</B></I>, this function returns <I><B>XY</B><SUP>T</SUP></I>.
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec39">6.6  Function mexCalcXYt</h3>
+<p>
+For two input matrices <span class="c006">X</span> and <span class="c006">Y</span>, this function returns <span class="c006">XY</span><sup><span class="c004">T</span></sup>.
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   Z =mexCalcXYt(X,Y);
 %
 % Name: mexCalcXYt
@@ -139,9 +148,11 @@ For two input matrices <I><B>X</B></I> and <I><B>Y</B></I>, this function return
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc28"></A><A NAME="htoc40">6.7</A>  Function mexCalcXtY</H3><P>
-For two input matrices <I><B>X</B></I> and <I><B>Y</B></I>, this function returns <I><B>X</B><SUP>T</SUP><B>Y</B></I>.
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec40">6.7  Function mexCalcXtY</h3>
+<p>
+For two input matrices <span class="c006">X</span> and <span class="c006">Y</span>, this function returns <span class="c006">X</span><sup><span class="c004">T</span></sup><span class="c006">Y</span>.
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   Z =mexCalcXtY(X,Y);
 %
 % Name: mexCalcXtY
@@ -156,9 +167,11 @@ For two input matrices <I><B>X</B></I> and <I><B>Y</B></I>, this function return
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc29"></A><A NAME="htoc41">6.8</A>  Function mexInvSym</H3><P>
-For an input symmetric matrices <I><B>A</B></I> in ℝ<SUP><I>n</I> × <I>n</I></SUP>, this function returns <I><B>A</B></I><SUP>−1</SUP>.
-</P><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec41">6.8  Function mexInvSym</h3>
+<p>
+For an input symmetric matrices <span class="c006">A</span> in ℝ<sup><span class="c004">n</span> × <span class="c004">n</span></sup>, this function returns <span class="c006">A</span><sup>−1</sup>.
+</p><pre class="verbatim"><span class="c002">% 
 % Usage:   B =mexInvSym(A);
 %
 % Name: mexInvSym
@@ -172,7 +185,9 @@ For an input symmetric matrices <I><B>A</B></I> in ℝ<SUP><I>n</I> × <I>n</I><
 % Author: Julien Mairal, 2009
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc30"></A><A NAME="htoc42">6.9</A>  Function mexNormalize</H3><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec42">6.9  Function mexNormalize</h3>
+<pre class="verbatim"><span class="c002">% 
 % Usage:   Y =mexNormalize(X);
 %
 % Name: mexNormalize
@@ -187,7 +202,9 @@ For an input symmetric matrices <I><B>A</B></I> in ℝ<SUP><I>n</I> × <I>n</I><
 % Author: Julien Mairal, 2010
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc31"></A><A NAME="htoc43">6.10</A>  Function mexSort</H3><PRE CLASS="verbatim"><FONT SIZE=2>% 
+</span></pre>
+<h3 class="subsection" id="sec43">6.10  Function mexSort</h3>
+<pre class="verbatim"><span class="c002">% 
 % Usage:   Y =mexSort(X);
 %
 % Name: mexSort
@@ -201,10 +218,13 @@ For an input symmetric matrices <I><B>A</B></I> in ℝ<SUP><I>n</I> × <I>n</I><
 % Author: Julien Mairal, 2010
 
 
-</FONT></PRE><H3 CLASS="subsection"><A NAME="toc32"></A><A NAME="htoc44">6.11</A>  Function mexDisplayPatches</H3><P>
-Print to the screen a matrix containing as columns image patches.</P><HR>
-<A HREF="doc_spams005.html"><IMG SRC="previous_motif.gif" ALT="Previous"></A>
-<A HREF="index.html"><IMG SRC="contents_motif.gif" ALT="Up"></A>
-<A HREF="doc_spams007.html"><IMG SRC="next_motif.gif" ALT="Next"></A>
-</BODY>
-</HTML>
+</span></pre>
+<h3 class="subsection" id="sec44">6.11  Function mexDisplayPatches</h3>
+<p>
+Print to the screen a matrix containing as columns image patches.</p>
+<hr>
+<a href="doc_spams005.html"><img src="previous_motif.gif" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.gif" alt="Up"></a>
+<a href="doc_spams007.html"><img src="next_motif.gif" alt="Next"></a>
+</body>
+</html>
