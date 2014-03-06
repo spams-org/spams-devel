@@ -1,54 +1,54 @@
-This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: doc_spams.aux
 The style file: plain.bst
 Database file #1: main.bib
 Warning--string name "op_r_l" is undefined
 --line 1314 of file main.bib
-Warning--I didn't find a database entry for "hochbaum"
 Warning--empty journal in brucker
 Warning--empty institution in meinshausen
 Warning--empty year in meinshausen
 Warning--empty year in obozinski
 Warning--empty institution in sprechmann
-You've used 31 entries,
+You've used 35 entries,
             2118 wiz_defined-function locations,
-            693 strings with 8823 characters,
-and the built_in function-call counts, 10269 in all, are:
-= -- 990
-> -- 497
+            712 strings with 9322 characters,
+and the built_in function-call counts, 11527 in all, are:
+= -- 1117
+> -- 569
 < -- 3
-+ -- 198
-- -- 164
-* -- 723
-:= -- 1731
-add.period$ -- 95
-call.type$ -- 31
-change.case$ -- 174
++ -- 226
+- -- 188
+* -- 814
+:= -- 1958
+add.period$ -- 107
+call.type$ -- 35
+change.case$ -- 200
 chr.to.int$ -- 0
-cite$ -- 36
-duplicate$ -- 382
-empty$ -- 816
-format.name$ -- 164
-if$ -- 2123
+cite$ -- 40
+duplicate$ -- 420
+empty$ -- 900
+format.name$ -- 188
+if$ -- 2372
 int.to.chr$ -- 0
-int.to.str$ -- 31
-missing$ -- 30
-newline$ -- 160
-num.names$ -- 62
-pop$ -- 181
+int.to.str$ -- 35
+missing$ -- 32
+newline$ -- 180
+num.names$ -- 70
+pop$ -- 199
 preamble$ -- 1
-purify$ -- 144
+purify$ -- 164
 quote$ -- 0
-skip$ -- 250
+skip$ -- 275
 stack$ -- 0
-substring$ -- 631
-swap$ -- 59
+substring$ -- 704
+swap$ -- 61
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 136
 warning$ -- 5
-while$ -- 97
-width$ -- 33
-write$ -- 335
-(There were 7 warnings)
+while$ -- 109
+width$ -- 37
+write$ -- 379
+(There were 6 warnings)
